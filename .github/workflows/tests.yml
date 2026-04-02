@@ -30,3 +30,25 @@ jobs:
           cmake ..
           make
           ./src/calculator add 10 5
+  Test_Sub:
+    runs-on: ubuntu-latest
+    needs: Compilation
+    steps:
+      - run: ./src/calculator sub 3 -2
+
+  Test_Mul:
+    runs-on: ubuntu-latest
+    needs: Compilation
+    steps:
+      - run: ./src/calculator mul 5 5
+
+  Test_Div:
+    runs-on: ubuntu-latest
+    needs: Compilation
+    steps:
+      - run: ./src/calculator div 10 2
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [Test_Add, Test_Sub, Test_Mul, Test_Div]
+    steps:
+      - run: echo "Déploiement de la solution"
